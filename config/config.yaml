@@ -1,0 +1,10 @@
+storage:
+  type: memory
+
+endpoints:
+  - name: Tower
+    group: core
+    url: "https://pmh-unraid.dk"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
