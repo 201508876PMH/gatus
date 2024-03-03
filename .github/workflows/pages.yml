@@ -1,0 +1,22 @@
+name: Build and Deploy Website
+on: workflow_dispatch
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker container and generate static files
+        run: |
+          docker run -v $(pwd)/docs:/output twinproduction/gatus:latest
+          # Replace the above command with the appropriate command to run your Docker container
+          # Ensure that the static files are generated in the 'docs' directory
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs
+          git commit -m "Update static files"
+          git push
